@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { membershipBenefits } from "@/lib/data";
+import { Button } from "../components/ui/button";
+import { membershipBenefits } from "../lib/data";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Check } from "lucide-react";
 

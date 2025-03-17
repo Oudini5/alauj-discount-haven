@@ -1,6 +1,6 @@
 
 import { useRef, useState } from "react";
-import { products } from "@/lib/data";
+import { products } from "../lib/data";
 import ProductCard from "./ProductCard";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";

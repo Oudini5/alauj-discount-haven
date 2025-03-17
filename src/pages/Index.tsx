@@ -1,10 +1,10 @@
 
-import Hero from "@/components/Hero";
-import FeaturedProducts from "@/components/FeaturedProducts";
-import MembershipCTA from "@/components/MembershipCTA";
+import Hero from "../components/Hero";
+import FeaturedProducts from "../components/FeaturedProducts";
+import MembershipCTA from "../components/MembershipCTA";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 
 const Index = () => {
