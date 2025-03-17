@@ -1,127 +1,140 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Menu, X, ShoppingBag, User } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import { ShoppingCart, Menu, X } from "lucide-react";
+import { currentUser } from "../lib/data";
 import { motion, AnimatePresence } from "framer-motion";
-import { currentUser } from "@/lib/data";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-
-  const navigation = [
-    { name: "Accueil", href: "/" },
-    { name: "Nos Offres", href: "/nos-offres" },
-    { name: "Devenir Membre", href: "/devenir-membre" },
-    { name: "FAQ", href: "/faq" }
-  ];
+  const isLoggedIn = currentUser !== null;
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  const links = [
+    { href: "/", label: "Accueil" },
+    { href: "/nos-offres", label: "Nos Offres" },
+    { href: "/devenir-membre", label: "Devenir Membre" },
+    { href: "/faq", label: "FAQ" },
+  ];
+
   return (
     <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled || mobileMenuOpen
-          ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent"
-      )}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/80 backdrop-blur-sm shadow-sm py-2"
+          : "bg-transparent py-4"
+      }`}
     >
       <div className="container-custom">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <span className="text-2xl font-display font-bold tracking-tight">Alauj</span>
-            </Link>
-          </div>
+        <div className="flex items-center justify-between">
+          <Link to="/" className="text-2xl font-bold text-primary">
+            Alauj
+          </Link>
 
-          <nav className="hidden md:flex md:items-center md:space-x-8">
-            {navigation.map((item) => (
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {links.map((link) => (
               <Link
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors button-transition",
-                  location.pathname === item.href
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
+                key={link.href}
+                to={link.href}
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  location.pathname === link.href
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-primary hover:bg-primary/10"
+                }`}
               >
-                {item.name}
+                {link.label}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
-            <Link
-              to={currentUser ? "/mon-compte" : "/devenir-membre"}
-              className="hidden md:flex items-center justify-center h-9 w-9 rounded-full bg-secondary transition-colors hover:bg-secondary/80"
-            >
-              <User className="h-4 w-4" />
-            </Link>
-            
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </Button>
+          <div className="hidden md:flex items-center space-x-4">
+            {isLoggedIn ? (
+              <>
+                <Button size="icon" variant="ghost" aria-label="Panier">
+                  <ShoppingCart className="h-5 w-5" />
+                </Button>
+                <Link to="/mon-compte">
+                  <Button variant="outline">Mon Compte</Button>
+                </Link>
+              </>
+            ) : (
+              <Link to="/devenir-membre">
+                <Button>Devenir Membre</Button>
+              </Link>
+            )}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="md:hidden"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-background"
           >
-            <div className="container-custom py-4">
-              <nav className="flex flex-col space-y-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={cn(
-                      "py-2 text-base font-medium transition-colors",
-                      location.pathname === item.href
-                        ? "text-foreground"
-                        : "text-muted-foreground"
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+            <div className="container-custom py-4 flex flex-col space-y-4">
+              {links.map((link) => (
                 <Link
-                  to={currentUser ? "/mon-compte" : "/devenir-membre"}
-                  className="py-2 text-base font-medium text-muted-foreground"
+                  key={link.href}
+                  to={link.href}
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    location.pathname === link.href
+                      ? "text-primary bg-primary/10"
+                      : "text-foreground/80"
+                  }`}
                 >
-                  {currentUser ? "Mon Compte" : "Se Connecter"}
+                  {link.label}
                 </Link>
-              </nav>
+              ))}
+              <div className="pt-2 border-t border-border">
+                {isLoggedIn ? (
+                  <>
+                    <Link to="/mon-compte" className="block my-2">
+                      <Button variant="outline" className="w-full">
+                        Mon Compte
+                      </Button>
+                    </Link>
+                  </>
+                ) : (
+                  <Link to="/devenir-membre" className="block my-2">
+                    <Button className="w-full">Devenir Membre</Button>
+                  </Link>
+                )}
+              </div>
             </div>
           </motion.div>
         )}

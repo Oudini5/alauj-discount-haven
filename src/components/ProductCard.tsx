@@ -1,11 +1,10 @@
 
-import { Product } from "@/lib/types";
+import { Product } from "../lib/types";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import DiscountBadge from "./DiscountBadge";
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 import { useState } from "react";
-import { currentUser } from "@/lib/data";
+import { currentUser } from "../lib/data";
 
 interface ProductCardProps {
   product: Product;
@@ -43,7 +42,11 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
           onLoad={() => setImageLoaded(true)}
           loading="lazy"
         />
-        <DiscountBadge discountPercentage={product.discountPercentage} />
+        {product.discountPercentage > 0 && (
+          <div className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded-full">
+            -{product.discountPercentage}%
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col justify-between p-4">
