@@ -25,8 +25,8 @@ const Index = () => {
             >
               <div className="rounded-xl overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1556742031-c6961e8560b0?w=800&auto=format&q=75" 
-                  alt="Shopper with bags" 
+                  src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=800&auto=format&q=75" 
+                  alt="Électronique et électroménager" 
                   className="w-full h-auto object-cover aspect-[4/3]"
                 />
               </div>
@@ -40,7 +40,7 @@ const Index = () => {
             >
               <h2 className="heading-2 mb-4">Comment ça fonctionne</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Alauj propose un concept unique : l'accès à des produits de marques à prix cassés moyennant une adhésion unique. 
+                Alauj propose un concept unique : l'accès à des produits électroniques et d'électroménager à prix cassés moyennant une adhésion unique. 
                 Contrairement aux sites de vente classiques, nous vous proposons des réductions allant jusqu'à 70% sur des articles neufs et authentiques.
               </p>
               
@@ -64,7 +64,7 @@ const Index = () => {
                   <div>
                     <h3 className="text-xl font-medium mb-1">Payez une seule fois</h3>
                     <p className="text-muted-foreground">
-                      Un paiement unique de 29,99€ pour un accès à vie à nos offres.
+                      Un paiement unique de 290€ pour un accès à vie à nos offres.
                     </p>
                   </div>
                 </div>

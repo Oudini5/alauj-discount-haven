@@ -42,7 +42,7 @@ const MembershipCTA = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Un paiement unique de 29,99€ vous donne accès à vie à des réductions exceptionnelles.
+            Un paiement unique de 290€ vous donne accès à vie à des réductions exceptionnelles.
           </motion.p>
         </div>
 

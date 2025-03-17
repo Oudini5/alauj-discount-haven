@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Check, CreditCard, ShieldCheck } from "lucide-react";
+import { Check, ShieldCheck, Unlock } from "lucide-react";
 import { toast } from "sonner";
 
 const Membership = () => {
@@ -38,7 +38,7 @@ const Membership = () => {
           >
             <h1 className="heading-1 mb-4">Devenir Membre</h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-lg">
-              Rejoignez Alauj dès aujourd'hui et accédez à vie à des produits de marques avec des réductions allant jusqu'à 70%.
+              Rejoignez Alauj dès aujourd'hui et accédez à vie à des produits électroniques et d'électroménager avec des réductions allant jusqu'à 70%.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -87,7 +87,7 @@ const Membership = () => {
                   <p className="text-muted-foreground text-sm">Accès illimité à tous les produits</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold">29,99€</p>
+                  <p className="text-2xl font-bold">290€</p>
                   <p className="text-sm text-muted-foreground">Paiement unique</p>
                 </div>
               </div>
@@ -130,8 +130,8 @@ const Membership = () => {
                       </>
                     ) : (
                       <>
-                        <CreditCard className="h-4 w-4" />
-                        Devenir membre - 29,99€
+                        <Unlock className="h-4 w-4" />
+                        Devenir membre - 290€ à vie
                       </>
                     )}
                   </Button>
