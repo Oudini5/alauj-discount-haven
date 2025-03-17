@@ -13,12 +13,12 @@ const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <Header />
       <AnimatePresence mode="wait">
         <motion.main
           key={location.pathname}
-          className="flex-1"
+          className="flex-1 w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
